@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Library Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/borrowers}">Borrower Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/index}">Book Management</a>
+
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<br>
+
+<div class = "container">
+    <div class = "row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+
+            <h1 class = "text-center">Update Book</h1>
+            <div class="card-body">
+                <form class="form" th:action="@{/books/__${book.id}__}" th:object="${book}" method = "post">
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" th:field="*{title}" id="title"
+                               class = "form-control"
+                               placeholder="Enter Book Title">
+                    </div>
+
+                    <div class="form-group">
+                        <label>ISBN</label>
+                        <input type="text"  th:field="*{isbn}" id="isbn"
+                               class = "form-control"
+                               placeholder="Enter Book ISBN">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Published Year</label>
+                        <input type="text"  th:field="*{publishedYear}" id="publishedYear"
+                               class = "form-control"
+                               placeholder="Enter Book Published Year">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Publisher</label>
+                        <select th:field="*{publisher}" id="publisher">
+                            <option value="">...</option>
+                            <option th:each="publisher : ${publishers}"
+                                    th:value="${publisher.id}"
+                                    th:text="${publisher.name}"></option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Author</label>
+                        <select th:field="*{authors}" id="authors">
+                            <option value="">...</option>
+                            <option th:each="author : ${authors}"
+                                    th:value="${author.id}"
+                                    th:text="${author.name + ' ' + author.surname}">Author Name</option>
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                        <a  class="btn btn-danger" href="/" th:href="@{/}">Cancel</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
