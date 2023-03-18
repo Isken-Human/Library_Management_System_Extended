@@ -8,7 +8,7 @@ This is a responsive web-based application for managing a library system. It all
 - Spring Data JPA
 - Maven
 - Thymeleaf
-- Bootstrap4
+- Bootstrap
 - PostgreSQL
 
 ### Build & Run 
