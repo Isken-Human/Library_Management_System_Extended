@@ -5,12 +5,16 @@ import kg.edu.alatoo.springWeb.modules.Borrower;
 import kg.edu.alatoo.springWeb.repos.AuthorRepository;
 import kg.edu.alatoo.springWeb.repos.BookRepository;
 import kg.edu.alatoo.springWeb.repos.PublisherRepository;
+import kg.edu.alatoo.springWeb.services.BookImageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +27,13 @@ public class BookController {
     private final PublisherRepository publisherRepository;
     private final AuthorRepository authorRepository;
 
-    public BookController(BookRepository bookRepository, PublisherRepository publisherRepository, AuthorRepository authorRepository) {
+    private final BookImageService bookService;
+
+    public BookController(BookRepository bookRepository, PublisherRepository publisherRepository, AuthorRepository authorRepository, BookImageService bookService) {
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
         this.authorRepository = authorRepository;
+        this.bookService = bookService;
     }
 
 
@@ -48,6 +55,7 @@ public class BookController {
         return "edit_book";
     }
 
+    /*
     @PostMapping("/books/{id}")
     public String updateBook (@PathVariable Long id, @ModelAttribute("book") Book book,
                                  Model model) {
@@ -64,14 +72,47 @@ public class BookController {
         bookRepository.save(existingBook.get());
         return "redirect:/";
 
+    }*/
+
+    @PostMapping("/books/{id}")
+    public String updateBook(@PathVariable Long id,
+                             @ModelAttribute("book") Book book,
+                             @RequestParam("file") MultipartFile file,
+                             Model model) {
+
+        Optional<Book> existingBook = bookRepository.findById(id);
+
+        if (existingBook.isPresent()) {
+            Book updatedBook = existingBook.get();
+            updatedBook.setId(id);
+            updatedBook.setTitle(book.getTitle());
+            updatedBook.setIsbn(book.getIsbn());
+            updatedBook.setPublishedYear(book.getPublishedYear());
+            updatedBook.setPublisher(book.getPublisher());
+            updatedBook.setAuthors(book.getAuthors());
+
+            if (!file.isEmpty()) {
+                try {
+                    updatedBook.setImage(file.getBytes());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            bookRepository.save(updatedBook);
+        }
+
+        return "redirect:/";
     }
 
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute Book book) {
-        bookRepository.save(book);
+    public String saveBook(@RequestParam("file") MultipartFile file,
+                           @ModelAttribute Book book) {
+        bookService.saveBookToDB(file, book.getTitle(), book.getIsbn(), book.getAuthors(), book.getPublisher(), book.getPublishedYear());
         return "redirect:/";
     }
+
 
     @GetMapping("/search")
     public String searchBooks(@RequestParam("q") String searchTerm,

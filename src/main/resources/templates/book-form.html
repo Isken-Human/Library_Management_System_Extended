@@ -43,7 +43,7 @@
 
       <h1 class = "text-center">Add New Book</h1>
       <div class="card-body">
-        <form class="form" th:action="@{/save}" th:object="${book}" method = "post">
+        <form class="form" th:action="@{/save}" th:object="${book}" method = "post" enctype="multipart/form-data">
 
           <div class="form-group">
             <label>Title</label>
@@ -69,6 +69,13 @@
           </div>
 
           <div class="form-group">
+            <label>Cover Image</label>
+            <input type="file" name="file" class="form-control-file" required />
+          </div>
+
+
+
+          <div class="form-group">
             <label>Publisher</label>
             <select th:field="*{publisher}" id="publisher">
               <option value="">...</option>
@@ -78,6 +85,7 @@
             </select>
 
           </div>
+
 
           <div class="form-group">
             <label>Author</label>

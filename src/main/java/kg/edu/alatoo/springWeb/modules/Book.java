@@ -11,9 +11,15 @@ public class Book {
 
     @Id @GeneratedValue
     private long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String isbn;
 
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB",nullable = false)
+    private byte[] image;
+    @Column(nullable = false)
     private int publishedYear;
 
     @ManyToMany
@@ -91,7 +97,13 @@ public class Book {
 
 
 
+    public byte[] getImage() {
+        return image;
+    }
 
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
 
     @Override
@@ -100,6 +112,7 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", image='" + image +
                 '}';
     }
 

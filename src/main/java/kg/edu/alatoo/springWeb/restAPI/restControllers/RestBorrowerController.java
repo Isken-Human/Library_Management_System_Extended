@@ -1,6 +1,6 @@
 package kg.edu.alatoo.springWeb.restAPI.restControllers;
 
-/*
+
 import kg.edu.alatoo.springWeb.restAPI.restModules.*;
 import kg.edu.alatoo.springWeb.restAPI.restRepos.*;
 import org.springframework.data.domain.Sort;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("api/borrower")
 public class RestBorrowerController {
 
-    private final RestBookRepository restborrowerRepository;
+    private final RestBorrowerRepository restborrowerRepository;
     private final RestBookRepository restbookRepository;
 
 
@@ -21,6 +21,11 @@ public class RestBorrowerController {
     public RestBorrowerController(RestBorrowerRepository restborrowerRepository, RestBookRepository restbookRepository) {
         this.restborrowerRepository = restborrowerRepository;
         this.restbookRepository = restbookRepository;
+    }
+
+    @GetMapping("/1234")
+    public List<RestBorrower> allBorrowers() {
+        return restborrowerRepository.findAll();
     }
 
     @GetMapping("/borrowers")
@@ -34,7 +39,7 @@ public class RestBorrowerController {
 
     @GetMapping("/borrowers/create")
     public String createBorrower(Model model) {
-        Borrower borrower = new Borrower();
+        RestBorrower borrower = new RestBorrower();
         model.addAttribute("borrower", borrower);
         model.addAttribute("book", restbookRepository.findAll());
         return "borrower-form";
@@ -42,7 +47,7 @@ public class RestBorrowerController {
 
 
     @PostMapping("/borrowers")
-    public String saveBorrower(@ModelAttribute Borrower borrower) {
+    public String saveBorrower(@ModelAttribute RestBorrower borrower) {
         restborrowerRepository.save(borrower);
         return "redirect:/borrowers";
     }
@@ -57,9 +62,9 @@ public class RestBorrowerController {
 
 
     @PostMapping("/borrowers/{id}")
-    public String updateBorrower(@PathVariable Long id, @ModelAttribute("borrower") Borrower borrower,
+    public String updateBorrower(@PathVariable Long id, @ModelAttribute("borrower") RestBorrower borrower,
                                  Model model) {
-        Borrower existingBorrower = restborrowerRepository.getById(id);
+        RestBorrower existingBorrower = restborrowerRepository.getById(id);
         existingBorrower.setId(id);
         existingBorrower.setName(borrower.getName());
         existingBorrower.setEmail(borrower.getEmail());
@@ -81,4 +86,3 @@ public class RestBorrowerController {
 
 
 }
-*/
