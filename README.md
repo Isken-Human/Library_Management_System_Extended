@@ -2,7 +2,7 @@
 ### This is an extended version of Library Management System Web Application Project for final. 
 
 This is a responsive web-based application for managing a library system. The application has user authentication and registration features.
-It allows librarians to add, edit, delete books and search for books, as well as manage borrowers and check out books to borrowers, while for users it allows to search for books by their title, ISBN or author.
+It allows librarians to add, edit, delete books and search for books, as well as manage borrowers and check out books to borrowers, while for users it allows to search for books by their title, ISBN or author, and see the details of found books.
 ### Built With:
 - Spring Boot
 - Spring Data JPA
