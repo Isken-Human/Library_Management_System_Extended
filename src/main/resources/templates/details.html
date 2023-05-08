@@ -50,7 +50,7 @@
   <hr>
   <div class="row">
     <div class="col-md-3">
-      <img th:src="@{'/books/' + ${book.id} + '/image'}" alt="Book Cover Image" class="img-thumbnail">
+      <img th:src="@{'/books/' + ${book.getId()} + '/image'}" alt="Book Cover Image" class="img-thumbnail">
     </div>
     <div class="col-md-9">
       <h2 th:text="${book.title}"></h2>

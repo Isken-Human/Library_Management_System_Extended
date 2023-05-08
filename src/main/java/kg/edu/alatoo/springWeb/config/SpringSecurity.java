@@ -18,24 +18,37 @@ public class SpringSecurity {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    private CustomAuthentificationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+
+    @Autowired
+    private CustomAuthentificationSuccessHandler customAuthentificationSuccessHandler;
+
+
+
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/register/**", "/forgot-password","/reset-password","/reset-password-request","/books/details/**","/search").permitAll()
+                                .requestMatchers("/register/**", "/forgot-password","/reset-password","/reset-password-request").permitAll()
+                                .requestMatchers("/user-search/**", "/search**","/books/**").hasAnyRole("USER","ADMIN")
                                 .requestMatchers("/**").hasRole("ADMIN")
+
+
+
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/borrowers")
+                                .successHandler(customAuthentificationSuccessHandler)
                                 .permitAll()
                 ).logout(
                         logout -> logout
