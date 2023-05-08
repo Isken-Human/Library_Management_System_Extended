@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Book Details</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Library Management System</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/borrowers}">Borrower Management</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/index}">Book Management</a>
+
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <h1 class="text-center">Book Details</h1>
+  <hr>
+  <div class="row" th:if="${book != null}">
+    <!-- ... -->
+  </div>
+  <div class="row" th:if="${errorMessage != null}">
+    <div class="col-md-12">
+      <h3 class="text-center text-danger" th:text="${errorMessage}"></h3>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <hr>
+  <div class="row">
+    <div class="col-md-3">
+      <img th:src="@{'/books/' + ${book.id} + '/image'}" alt="Book Cover Image" class="img-thumbnail">
+    </div>
+    <div class="col-md-9">
+      <h2 th:text="${book.title}"></h2>
+      <hr>
+      <p><strong>Author:</strong> <span th:text="${book.authorsNames}"></span></p>
+      <p><strong>Publisher:</strong> <span th:text="${book.publisher.name}"></span></p>
+      <p><strong>Published Year:</strong> <span th:text="${book.publishedYear}"></span></p>
+      <p><strong>ISBN:</strong> <span th:text="${book.isbn}"></span></p>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
