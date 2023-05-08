@@ -6,20 +6,21 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Entity
 public class Book {
 
     @Id @GeneratedValue
     private long id;
-    @Column(nullable = false)
+    @Column
     private String title;
-    @Column(nullable = false)
+    @Column
     private String isbn;
 
     @Lob
-    @Column(columnDefinition = "MEDIUMBLOB",nullable = false)
+    @Column(columnDefinition = "MEDIUMBLOB")
     private byte[] image;
-    @Column(nullable = false)
+    @Column
     private int publishedYear;
 
     @ManyToMany
@@ -35,8 +36,8 @@ public class Book {
     }
 
     public Book(String title, String isbn) {
-            this.title = title;
-            this.isbn = isbn;
+        this.title = title;
+        this.isbn = isbn;
     }
 
     public long getId() {
@@ -56,7 +57,7 @@ public class Book {
         this.title = title;
     }
 
-    public String getIsbn() {
+    public  String getIsbn() {
         return isbn;
     }
 
@@ -70,12 +71,13 @@ public class Book {
 
 
     public Set<String> getAuthorsNames() {
-        Set<String> authours_name = new HashSet<>() ;
-        for (Author author:
-             authors) { authours_name.add(author.getName()+" "+author.getSurname());}
-
-        return authours_name;
+        Set<String> authorNames = new HashSet<>();
+        for (Author author : authors) {
+            authorNames.add(author.getName() + " " + author.getSurname());
+        }
+        return authorNames;
     }
+
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
@@ -146,3 +148,6 @@ public class Book {
 
 
 }
+
+
+
