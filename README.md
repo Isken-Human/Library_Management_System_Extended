@@ -25,6 +25,11 @@ It allows librarians to add, edit, delete books and search for books, as well as
   http://localhost:8082
 ```
 
+## Login, Registration and Email Verification
+![This is an image](/Photos/Login.png)
+![This is an image](/Photos/Registration.png)
+![This is an image](/Photos/Forgot_Password.png)
+
 ## Home Page
 The home page displays a list of all books in the library. You can add, edit or delete books from here.
 
