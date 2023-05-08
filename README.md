@@ -38,7 +38,7 @@ It allows librarians to add, edit, delete books and search for books, as well as
 ![This is an image](/Photos/update_borrower.png)
 
 ## User Access
-![This is an image](/Photos/user-search.png)
+![This is an image](/Photos/user_search.png)
 ![This is an image](/Photos/search-result.png)
 ![This is an image](/Photos/book-details.png)
 
