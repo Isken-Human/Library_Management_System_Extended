@@ -6,6 +6,7 @@ It allows librarians to add, edit, delete books and search for books, as well as
 ### Built With:
 - Spring Boot
 - Spring Data JPA
+- Spring Security
 - Maven
 - Thymeleaf
 - Bootstrap
@@ -13,10 +14,11 @@ It allows librarians to add, edit, delete books and search for books, as well as
 
 ### Build & Run 
 ```
-  git clone https://github.com/Isken-Human/Library_Management_System.git
+  git clone https://github.com/Isken-Human/Library_Management_System_Extended.git
   cd Library_Management_System
   mvn clean package
   java -jar target/library-management-system-0.0.1-SNAPSHOT.jar
+
 ```
 ### Port
 ```
