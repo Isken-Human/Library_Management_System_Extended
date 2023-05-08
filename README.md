@@ -30,27 +30,17 @@ It allows librarians to add, edit, delete books and search for books, as well as
 ![This is an image](/Photos/Registration.png)
 ![This is an image](/Photos/Forgot_Password.png)
 
-## Home Page
-The home page displays a list of all books in the library. You can add, edit or delete books from here.
-
+## Librarian Access
 ![This is an image](/Photos/list_of_books.png)
 ![This is an image](/Photos/add_new_book.png)
-
-
-## Search Page
-You can search for books by title, author, or ISBN on the search page. The results will be displayed in a table. To clear the search results, click on the "Clear Results" button.
-
 ![This is an image](/Photos/search_result.png)
-
-
-
-## Borrower Management
-On the borrower management page, you can view a list of all borrowers and add new ones.
-
 ![This is an image](/Photos/list_of_borrowers.png)
-![This is an image](/Photos/add_new_borrower.png)
 ![This is an image](/Photos/update_borrower.png)
 
+## User Access
+![This is an image](/Photos/user-search.png)
+![This is an image](/Photos/search-result.png)
+![This is an image](/Photos/book-details.png)
 
 
 
