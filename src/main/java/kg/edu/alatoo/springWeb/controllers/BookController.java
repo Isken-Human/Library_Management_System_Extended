@@ -53,6 +53,31 @@ public class BookController {
         return "details";
     }
 
+
+    @GetMapping("/user-search")
+    public String userSearch(){
+        return "user-search";
+    }
+
+    @GetMapping("/user-search/search")
+    public String user_searchBooks(@RequestParam("q") String searchTerm,
+                              @RequestParam("category") String category,
+                              Model model) {
+        List<BookDTO> books = null;
+        if (category.equals("title")) {
+            books = bookDTORepository.findByTitleContainingIgnoreCase(searchTerm);
+        } else if (category.equals("author")) {
+            books = bookDTORepository.findByAuthorsNameContainingIgnoreCase(searchTerm);
+        } else if (category.equals("isbn")) {
+            books = bookDTORepository.findByIsbnContainingIgnoreCase(searchTerm);
+        }
+        model.addAttribute("book", books);
+        return "user-search_results";
+
+    }
+
+
+
     @GetMapping("/books/edit/{id}")
     public String editBook(@PathVariable Long id, Model model) {
         Book book = bookRepository.findById(id).get();

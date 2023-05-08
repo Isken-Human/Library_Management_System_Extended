@@ -74,7 +74,6 @@ public class AuthController {
         try {
             emailService.sendPasswordResetEmail(user.getEmail(), "Password Reset Request", token);
         } catch (MessagingException e) {
-            // You can log the exception here or return an error message to the user
             return new ResponseEntity<>("Failed to send password reset email", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (jakarta.mail.MessagingException e) {
             throw new RuntimeException(e);
